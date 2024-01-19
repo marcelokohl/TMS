@@ -27,9 +27,10 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("ui_action"):
-		var character_global_position = player.global_position
+		var character_global_position = Vector2(player.global_position.x, player.global_position.y+16)
 		var tile_position = tilemap.local_to_map(character_global_position)
-		tilemap.set_cell(1, tile_position, 0, Vector2i(2,0))
+		tilemap.set_cell(0, tile_position, 0, Vector2i(0,0))
+		tilemap.set_cell(2, tile_position, 0, Vector2i(2,1))
 
 		var current_navpoly = navRegion.navigation_polygon
 
@@ -57,8 +58,8 @@ func _input(event):
 		
 		
 func createEnemy():
-	var enemy_node = get_node("NavigationRegion2D/Enemy")
-	var cloned_node = enemy_node.duplicate()
-	cloned_node.add_to_group("enemy")
-	add_child(cloned_node)
-	cloned_node.position = Vector2(0, 0)
+	var scene = load("res://enemy.tscn")
+	var node_instance = scene.instantiate()
+	node_instance.add_to_group("enemy")
+	node_instance.position = Vector2(0, 0)
+	$NavigationRegion2D.add_child(node_instance)
