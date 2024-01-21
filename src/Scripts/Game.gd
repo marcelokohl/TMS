@@ -2,7 +2,7 @@ extends Node
 #var your_scene = preload("res://tree.tscn")
 @onready var tilemap 	: TileMap = $TileMap 
 @onready var player  	: CharacterBody2D = $NavigationRegion2D/Player 
-@onready var navRegion  : NavigationRegion2D = $NavigationRegion2D 
+@onready var navRegion  : Node2D = $NavigationRegion2D 
 
 func _ready():
 	set_process_input(true)
